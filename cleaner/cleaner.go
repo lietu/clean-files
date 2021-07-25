@@ -17,12 +17,7 @@ func Run(configFile string, dryRun bool) {
 func CleanByRules(rules map[string]clean_files.Rule, dryRun bool) {
 	for name, rule := range rules {
 		ruleFiles := findAllFiles(rule.Globs)
-		keep := time.Duration(rule.KeepDays) * time.Hour * 24
-		if keep == 0 {
-			keep = rule.Keep
-		}
-
-		cleanFiles(name, ruleFiles, keep, dryRun)
+		cleanFiles(name, ruleFiles, rule.Keep, dryRun)
 	}
 }
 

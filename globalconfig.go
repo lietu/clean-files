@@ -85,10 +85,13 @@ func ReadGlobalConfig(configFile string) GlobalConfig {
 					glg.Errorf("Failed to decode rule %s in %s: %s", name, configFile, err)
 				} else {
 					if r.validate(configFile, "globs."+name) {
-						keep, _ := time.ParseDuration(r.Keep)
+						keep := time.Duration(r.KeepDays) * time.Hour * 24
+						if r.Keep != "" {
+							keep, _ = time.ParseDuration(r.Keep)
+						}
+
 						rules[name] = Rule{
 							Globs:    r.Globs,
-							KeepDays: r.KeepDays,
 							Keep:     keep,
 						}
 					}

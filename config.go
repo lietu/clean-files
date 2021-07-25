@@ -13,7 +13,6 @@ import (
 
 type Rule struct {
 	Globs    []string
-	KeepDays int
 	Keep     time.Duration
 }
 
@@ -40,10 +39,12 @@ func (r rawRule) validate(file, ruleName string) bool {
 		return false
 	}
 
-	_, err := time.ParseDuration(r.Keep)
-	if err != nil {
-		glg.Errorf("Error parsing %s rule %s: keep is not a valid duration: %s", file, ruleName, err)
-		return false
+	if r.Keep != "" {
+		_, err := time.ParseDuration(r.Keep)
+		if err != nil {
+			glg.Errorf("Error parsing %s rule %s: keep is not a valid duration: %s", file, ruleName, err)
+			return false
+		}
 	}
 
 	if r.Keep == "" && r.KeepDays == 0 {
@@ -63,6 +64,7 @@ func newUserConfig() UserConfig {
 
 func detectUserConfig() string {
 	for _, path := range CurrentUserConfigs {
+		// TODO: Parse env variables
 		if _, err := os.Stat(path); !os.IsNotExist(err) {
 			glg.Errorf("Error trying to stat() %s: %s", path, err)
 		}
@@ -103,10 +105,13 @@ func ReadUserConfig(configFile string) UserConfig {
 					glg.Errorf("Failed to decode rule %s in %s: %s", name, configFile, err)
 				} else {
 					if r.validate(configFile, "globs."+name) {
-						keep, _ := time.ParseDuration(r.Keep)
+						keep := time.Duration(r.KeepDays) * time.Hour * 24
+						if r.Keep != "" {
+							keep, _ = time.ParseDuration(r.Keep)
+						}
+
 						rules[name] = Rule{
 							Globs:    r.Globs,
-							KeepDays: r.KeepDays,
 							Keep:     keep,
 						}
 					}
