@@ -1,0 +1,9 @@
+[Unit]
+Description=Clean Files utility monitoring service
+
+[Service]
+ExecStart=/usr/bin/clean-files --monitor
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
