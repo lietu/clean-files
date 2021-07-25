@@ -29,7 +29,7 @@ func newGlobalConfig() GlobalConfig {
 
 func detectGlobalConfig() string {
 	for _, path := range GlobalConfigs {
-		if _, err := os.Stat(path); !os.IsNotExist(err) {
+		if _, err := os.Stat(path); err != nil && !os.IsNotExist(err) {
 			glg.Errorf("Error trying to stat() %s: %s", path, err)
 		}
 	}
