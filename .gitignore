@@ -1,0 +1,6 @@
+*.exe
+*.exe~
+coverage.txt
+.idea/
+artifacts/
+*.syso

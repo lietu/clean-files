@@ -1,0 +1,29 @@
+# github.com/goccy/go-json v0.7.4
+github.com/goccy/go-json
+github.com/goccy/go-json/internal/decoder
+github.com/goccy/go-json/internal/encoder
+github.com/goccy/go-json/internal/encoder/vm
+github.com/goccy/go-json/internal/encoder/vm_color
+github.com/goccy/go-json/internal/encoder/vm_color_indent
+github.com/goccy/go-json/internal/encoder/vm_indent
+github.com/goccy/go-json/internal/errors
+github.com/goccy/go-json/internal/runtime
+# github.com/kpango/fastime v1.0.17
+github.com/kpango/fastime
+# github.com/kpango/glg v1.6.4
+## explicit
+github.com/kpango/glg
+# github.com/mitchellh/mapstructure v1.4.1
+## explicit
+github.com/mitchellh/mapstructure
+# github.com/pelletier/go-toml/v2 v2.0.0-beta.3
+## explicit
+github.com/pelletier/go-toml/v2
+github.com/pelletier/go-toml/v2/internal/ast
+github.com/pelletier/go-toml/v2/internal/danger
+github.com/pelletier/go-toml/v2/internal/tracker
+# github.com/sirupsen/logrus v1.8.1
+## explicit
+# github.com/spf13/pflag v1.0.5
+## explicit
+github.com/spf13/pflag

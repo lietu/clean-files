@@ -1,0 +1,8 @@
+[main]
+clean_frequency = "60s" # supports ms, s, m, h
+
+[globs.downloads]
+globs = ["/home/*/Downloads/**/*", "C:\\Users\\*\\Downloads\\**\\*"]
+#keep_days = 14  # Each day is exactly 24 hours
+# or
+keep = "1h" # supports ms, s, m, h
