@@ -65,7 +65,10 @@ func newUserConfig() UserConfig {
 func detectUserConfig() string {
 	for _, path := range CurrentUserConfigs {
 		// TODO: Parse env variables
-		if _, err := os.Stat(path); err != nil && !os.IsNotExist(err) {
+		_, err := os.Stat(path)
+		if err == nil {
+			return path
+		} else if !os.IsNotExist(err) {
 			glg.Errorf("Error trying to stat() %s: %s", path, err)
 		}
 	}
